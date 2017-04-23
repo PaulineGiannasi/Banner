@@ -1,0 +1,11 @@
+name = banner
+description = Add a banner depending on the menu item root
+core = 7.x
+
+regions[header] = Header
+regions[content] = Content
+
+
+
+
+

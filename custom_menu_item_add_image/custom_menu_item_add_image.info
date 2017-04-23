@@ -1,0 +1,9 @@
+name = Menu Item Add Image
+description = Add an image field to the root menu items
+package = Custom
+core = 7.x
+
+files[] = custom_menu_item_add_image.module
+
+
+

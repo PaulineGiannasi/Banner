@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * Implements hook_form_alter().
+ */
+function custom_menu_item_add_image_form_alter(&$form, &$form_state, $form_id) {
+	
+	//Only for root menu item of the main-menu
+	if($form_id == 'menu_edit_item' && $form['parent']['#default_value'] == 'main-menu:0'){
+		
+		//Retrieve the image id
+		$fid = 0;
+		if(array_key_exists('other', $form['options']['#value'])){
+			$fid = $form['options']['#value']['other']['fid'];
+		}
+
+		//Create an image field
+		$form['banner_fid'] = array(
+		'#title' => t('Image'),
+		'#type' => 'managed_file',
+		'#description' => t('The uploaded image will be displayed as a banner.'),
+		'#default_value' => $fid,
+		'#upload_location' => 'public://banner/',
+		'#upload_validators' => array(
+		'file_validate_extensions' => array(
+		'gif png jpg jpeg'
+		),
+		),
+		);
+	}
+}
+
+/**
+ * Implements hook_menu_link_alter().
+ */
+function custom_menu_item_add_image_menu_link_alter(&$item){
+	//Save the image id in the options of the link
+	if(array_key_exists('banner_fid', $item)){
+		$item['options']['other']['fid'] = $item['banner_fid'];
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
